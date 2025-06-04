@@ -1,0 +1,68 @@
+Title: Margin - Groww API
+
+URL Source: http://groww.in/trade-api/docs/python-sdk/margin
+
+Markdown Content:
+[](https://groww.in/)[![Image 1: Groww Logo](https://groww.in/favicon32x32-groww.ico)Groww API](https://groww.in/trade-api)
+
+This guide describes how to calculate required margin for orders and get available user margin using the SDK.
+
+Easily retrieve your available margin details using this `get_available_margin_details` method.
+
+### [Python SDK Usage](http://groww.in/trade-api/docs/python-sdk/margin#python-sdk-usage)
+
+### [Response Payload](http://groww.in/trade-api/docs/python-sdk/margin#response-payload)
+
+#### [Response Schema](http://groww.in/trade-api/docs/python-sdk/margin#response-schema)
+
+| Name | Type | Description |
+| --- | --- | --- |
+| clear_cash | float | Clear cash available |
+| net_margin | float | Net margin available |
+| brokerage_and_charges | float | Brokerage and charges |
+| collateral_used | float | Collateral used |
+| collateral_available | float | Collateral available |
+| adhoc_margin | float | Adhoc margin available |
+| net_fno_margin | float | Net FNO Margin |
+| span_margin_used | float | Span Margin Used |
+| exposure_margin_used | float | Exposure Margin Used |
+| future_balance_available | float | Future Balance Available |
+| option_buy_balance_available | float | Option Buy Balance Available |
+| option_sell_balance_available | float | Option Sell Balance Available |
+| net_equity_margin | float | Net equity margin |
+| cnc_margin_used | float | CNC margin used |
+| mis_margin_used | float | MIS margin used |
+| cnc_balance_available | float | CNC balance available |
+| mis_balance_available | float | MIS balance available |
+
+`*` All amounts in rupees.
+
+* * *
+
+Calculate the required margin for a single order or basket of orders using this `get_order_margin_details` method.
+
+### [Python SDK Usage](http://groww.in/trade-api/docs/python-sdk/margin#python-sdk-usage-1)
+
+#### [Request Schema](http://groww.in/trade-api/docs/python-sdk/margin#request-schema)
+
+| Name | Type | Description |
+| --- | --- | --- |
+| segment `*` | string | The [Segment](https://groww.in/trade-api/docs/python-sdk/annexures#segment) of the Orders `CASH``FNO` |
+| orders `*` | array | Array of order details |
+
+### [Response Payload](http://groww.in/trade-api/docs/python-sdk/margin#response-payload-1)
+
+#### [Response Schema](http://groww.in/trade-api/docs/python-sdk/margin#response-schema-1)
+
+| Name | Type | Description |
+| --- | --- | --- |
+| exposure_required | float | Margin required to cover the exposure for the trade. |
+| span_required | float | SPAN margin required for F&O trades (not applicable for equity cash segment). |
+| option_buy_premium | float | Premium amount required for buying options contracts. |
+| brokerage_and_charges | float | Total brokerage and other exchange-related charges for the order. |
+| total_requirement | float | Total margin requirement including all charges and margin components. |
+| cash_cnc_margin_required | float | Margin required for CNC (Cash & Carry) orders in the cash segment. |
+| cash_mis_margin_required | float | Margin required for MIS (Margin Intraday Square-off) orders in the cash segment. |
+| physical_delivery_margin_requirement | float | Additional margin required for physical settlement of derivative contracts. |
+
+`*` All amounts in rupees.

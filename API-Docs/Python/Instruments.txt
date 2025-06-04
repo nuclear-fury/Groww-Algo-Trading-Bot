@@ -1,0 +1,221 @@
+Title: Instruments - Groww API
+
+URL Source: http://groww.in/trade-api/docs/python-sdk/instruments
+
+Markdown Content:
+Instruments - Groww API
+
+===============
+[[![Image 1: Groww Logo](https://groww.in/favicon32x32-groww.ico)Groww API](http://groww.in/trade-api)](http://groww.in/)
+
+[[![Image 2: Groww Logo](https://groww.in/favicon32x32-groww.ico)Groww API](http://groww.in/trade-api)](http://groww.in/)
+
+Python SDK Docs
+
+Documentation for Python SDK
+
+Search
+
+⌘K
+
+[Documentation](http://groww.in/trade-api/docs)
+
+[Introduction](http://groww.in/trade-api/docs/python-sdk)[Instruments](http://groww.in/trade-api/docs/python-sdk/instruments)[Orders](http://groww.in/trade-api/docs/python-sdk/orders)[Portfolio](http://groww.in/trade-api/docs/python-sdk/portfolio)[Margin](http://groww.in/trade-api/docs/python-sdk/margin)[Live Data](http://groww.in/trade-api/docs/python-sdk/live-data)[Historical Data](http://groww.in/trade-api/docs/python-sdk/historical-data)[Feed](http://groww.in/trade-api/docs/python-sdk/feed)[Annexures](http://groww.in/trade-api/docs/python-sdk/annexures)[Exceptions](http://groww.in/trade-api/docs/python-sdk/exceptions)
+
+On this page Instruments
+Instruments
+===========
+
+This guide explains how to download and use instrument data with the Groww API SDK.
+
+[Instruments](http://groww.in/trade-api/docs/python-sdk/instruments#instruments)
+================================================================================
+
+A latest list of instruments is automatically downloaded for you on the first run of the SDK. You can also download it as a csv file from [here](https://growwapi-assets.groww.in/instruments/instrument.csv).
+
+### [CSV Format](http://groww.in/trade-api/docs/python-sdk/instruments#csv-format)
+
+The full CSV file contains instrument details in the following format. Each individual column [is explained below](http://groww.in/trade-api/docs/python-sdk/instruments#instrument-csv-columns).
+
+```
+exchange,exchange_token,trading_symbol,groww_symbol,name,instrument_type,segment,series,isin,underlying_symbol,underlying_exchange_token,lot_size,expiry_date,strike_price,tick_size,freeze_quantity,is_reserved,buy_allowed,sell_allowed,feed_key
+NSE,NIFTY,NIFTY,NSE-NIFTY,NIFTY 50,IDX,CASH,,NIFTY,,,,,,,,,0,0,NIFTY
+BSE,1,1,BSE-1,Bse Sensex,IDX,CASH,,SENSEX,,,,,,,,,0,0,1
+NSE,2885,RELIANCE,NSE-RELIANCE,Reliance Industries,EQ,CASH,EQ,INE002A01018,,,1,,,5,,,1,1,RELIANCE
+BSE,500325,RELIANCE,BSE-500325,Reliance Industries,EQ,CASH,A,INE002A01018,,,1,,,5,,,1,1,RELIANCE
+NSE,65817,NIFTY2520617750CE,NSE-NIFTY-06Feb25-17750-CE,,CE,FNO,,,NIFTY,26000,75,2025-02-06,17750,5,1801,1,1,1,NIFTY2520617750CE
+NSE,35001,NIFTY25MARFUT,NSE-NIFTY-Mar25-FUT,,FUT,FNO,,,NIFTY,26000,75,2025-03-27,0,5,1801,0,1,1,NIFTY25MARFUT
+BSE,859084,SENSEX2520470800PE,BSE-SENSEX-04Feb25-70800-PE,,PE,FNO,,,SENSEX,1,20,2025-02-04,70800,5,1001,0,1,1,SENSEX2520470800PE
+BSE,842068,SENSEX25MARFUT,BSE-SENSEX-Mar25-FUT,,FUT,FNO,,,SENSEX,1,20,2025-03-25,0,5,1001,0,1,1,SENSEX25MARFUT
+NSE,50644,SBICARD25FEB1060CE,NSE-SBICARD-Feb25-1060-CE,,CE,FNO,,,SBICARD,17971,800,2025-02-27,1060,5,32001,1,1,1,SBICARD25FEB1060CE
+NSE,43355,SBIN25MARFUT,NSE-SBIN-Mar25-FUT,,FUT,FNO,,,SBIN,3045,750,2025-03-27,0,5,30001,0,1,1,SBIN25MARFUT
+...
+```
+
+### [Python SDK Usage](http://groww.in/trade-api/docs/python-sdk/instruments#python-sdk-usage)
+
+Example: You can directly use the get_instrument_by_groww_symbol method to get instrument details.
+
+```
+from growwapi import GrowwAPI
+ 
+# Groww API Credentials (Replace with your actual credentials)
+API_AUTH_TOKEN = "your_token"
+ 
+# Initialize Groww API
+groww = GrowwAPI(API_AUTH_TOKEN)
+ 
+get_instrument_by_groww_symbol_response = groww.get_instrument_by_groww_symbol(
+    groww_symbol="NSE-RELIANCE"
+)
+print(get_instrument_by_groww_symbol_response)
+```
+
+### [Output](http://groww.in/trade-api/docs/python-sdk/instruments#output)
+
+```out
+# The instrument details are printed
+Instrument: {'exchange': 'NSE', 'exchange_token': 2885, 'trading_symbol': 'RELIANCE', 'groww_symbol': 'NSE-RELIANCE', 'name': 'Reliance Industries', 'instrument_type': 'EQ', 'segment': 'CASH', 'series': 'EQ', 'isin': 'INE002A01018', 'underlying_symbol': nan, 'underlying_exchange_token': nan, 'lot_size': 1, 'expiry_date': nan, 'strike_price': nan, 'tick_size': 5, 'freeze_quantity': nan, 'is_reserved': 0, 'buy_allowed': 1, 'sell_allowed': 1, 'feed_key': 'RELIANCE'}
+```
+
+Other ways to get instrument data are by `trading_symbol` and `exchange_token`.
+
+```
+from growwapi import GrowwAPI
+ 
+# Groww API Credentials (Replace with your actual credentials)
+API_AUTH_TOKEN = "your_token"
+ 
+# Initialize Groww API
+groww = GrowwAPI(API_AUTH_TOKEN)
+ 
+get_instrument_by_trading_symbol_response = groww.get_instrument_by_exchange_and_trading_symbol(
+    exchange = groww.EXCHANGE_NSE,
+    trading_symbol="RELIANCE"
+)
+print(get_instrument_by_trading_symbol_response)
+```
+
+```
+from growwapi import GrowwAPI
+ 
+# Groww API Credentials (Replace with your actual credentials)
+API_AUTH_TOKEN = "your_token"
+ 
+# Initialize Groww API
+groww = GrowwAPI(API_AUTH_TOKEN)
+ 
+get_instrument_by_exchange_token_response = groww.get_instrument_by_exchange_token(
+    exchange_token="2885"
+)
+print(get_instrument_by_exchange_token_response)
+```
+
+You can also get all the instruments' data as a dataframe.
+
+```
+from growwapi import GrowwAPI
+ 
+# Groww API Credentials (Replace with your actual credentials)
+API_AUTH_TOKEN = "your_token"
+ 
+# Initialize Groww API
+groww = GrowwAPI(API_AUTH_TOKEN)
+ 
+instruments_df = groww.get_all_instruments()
+print(instruments_df.head())
+```
+
+### [Output](http://groww.in/trade-api/docs/python-sdk/instruments#output-1)
+
+```out
+exchange exchange_token          trading_symbol                   groww_symbol  ... is_reserved buy_allowed sell_allowed internal_trading_symbol
+0      NSE          35154      ASIANPAINT25FEBFUT       NSE-ASIANPAINT-Feb25-FUT  ...           0           1            1      ASIANPAINT25FEBFUT
+1      NSE          35158          ABB25APR9600PE          NSE-ABB-Apr25-9600-PE  ...           1           1            1          ABB25APR9600PE
+2      NSE          35044       NIFTY25MAR29050PE     NSE-NIFTY-27Mar25-29050-PE  ...           1           1            1       NIFTY25MAR29050PE
+3      NSE          35093    FINNIFTY25MAR29600PE    NSE-FINNIFTY-Mar25-29600-PE  ...           1           1            1    FINNIFTY25MAR29600PE
+4      NSE          35047  NIFTYNXT5025FEB56600CE  NSE-NIFTYNXT50-Feb25-56600-CE  ...           0           1            1  NIFTYNXT5025FEB56600CE
+```
+
+[Using CSV Data](http://groww.in/trade-api/docs/python-sdk/instruments#using-csv-data)
+--------------------------------------------------------------------------------------
+
+Create a structured model from the CSV data and use it for various purposes in the SDK.
+
+### [Python SDK Usage](http://groww.in/trade-api/docs/python-sdk/instruments#python-sdk-usage-1)
+
+Example: fetch live data or place an order.
+
+```
+import pandas as pd
+from growwapi import GrowwAPI
+# Initialize GrowwAPI and load instruments
+# Groww API Credentials (Replace with your actual credentials)
+API_AUTH_TOKEN = "your_token"
+ 
+# Initialize Groww API
+groww = GrowwAPI(API_AUTH_TOKEN)
+ 
+# Select an instrument (example: Reliance Industries)
+selected = groww.get_instrument_by_groww_symbol("NSE-RELIANCE")
+ 
+# Fetch latest price data for the selected instrument
+ltp_response = groww.get_ltp(
+    exchange_trading_symbols="NSE_" + selected['trading_symbol'],
+    segment=selected['segment'],
+)
+print("Live Data:", ltp_response)
+```
+
+### [Output](http://groww.in/trade-api/docs/python-sdk/instruments#output-2)
+
+```out
+# The latest price data for the selected instrument is printed
+{"ltp" : 149.5}
+```
+
+[Instrument CSV Columns](http://groww.in/trade-api/docs/python-sdk/instruments#instrument-csv-columns)
+------------------------------------------------------------------------------------------------------
+
+The CSV contains the following columns (separated by commas):
+
+| Name | Type | Description |
+| --- | --- | --- |
+| exchange | string | The [Exchange](http://groww.in/trade-api/docs/python-sdk/annexures#exchange) where the instrument is traded |
+| exchange_token | string | The unique token assigned to the instrument by the exchange |
+| trading_symbol | string | The trading symbol of the instrument to place orders with |
+| groww_symbol | string | The symbol used by Groww to identify the instrument |
+| name | string | The name of the instrument |
+| instrument_type | string | The [type of the instrument](http://groww.in/trade-api/docs/python-sdk/annexures#instrument-type) |
+| segment | string | The [segment of the instrument](http://groww.in/trade-api/docs/python-sdk/annexures#segment) |
+| series | string | The series of the instrument (e.g., EQ, A, B, etc.) |
+| isin | string | The International Securities Identification Number (ISIN) of the instrument |
+| underlying_symbol | string | The symbol of the underlying asset (for derivatives). Empty for stocks and indices |
+| underlying_exchange_token | string | The exchange token of the underlying asset |
+| lot_size | number | The minimum lot size for trading the instrument |
+| expiry_date | string | The expiry date of the instrument (for Derivatives) |
+| strike_price | number | The strike price of the instrument (for Options) |
+| tick_size | number | The minimum price movement for the instrument |
+| freeze_quantity | number | The quantity that is frozen for trading |
+| is_reserved | boolean | Whether the instrument is reserved for trading |
+| buy_allowed | boolean | Whether buying the instrument is allowed |
+| sell_allowed | boolean | Whether selling the instrument is allowed |
+| feed_key | string | The key used for subscribing to live data for the instrument |
+
+[Advanced uses](http://groww.in/trade-api/docs/python-sdk/instruments#advanced-uses)
+------------------------------------------------------------------------------------
+
+You can also download the csv file and use it for your own purposes. Here is an example of how you can load the csv file and use it in your code.
+
+```
+from growwapi import GrowwAPI
+import pandas as pd
+# Load the CSV file
+instruments = pd.read_csv(groww.INSTRUMENT_CSV_URL)
+```
+
+[Previous Introduction](http://groww.in/trade-api/docs/python-sdk)[Next Orders](http://groww.in/trade-api/docs/python-sdk/orders)
+
+### On this page
+
+[Instruments](http://groww.in/trade-api/docs/python-sdk/instruments#instruments)[Using CSV Data](http://groww.in/trade-api/docs/python-sdk/instruments#using-csv-data)[Instrument CSV Columns](http://groww.in/trade-api/docs/python-sdk/instruments#instrument-csv-columns)[Advanced uses](http://groww.in/trade-api/docs/python-sdk/instruments#advanced-uses)

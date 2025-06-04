@@ -1,0 +1,53 @@
+Title: Introduction - Groww API
+
+URL Source: http://groww.in/trade-api/docs/python-sdk
+
+Markdown Content:
+Welcome to the Groww Trading API! Our APIs enable you to build and automate trading strategies with seamless access to real-time market data, order placement, portfolio management, and more. Whether you're an experienced algo trader or just starting with automation, Groww's API is designed to be simple, powerful, and developer-friendly.
+
+This SDK wraps our REST-like APIs into easy-to-use Python methods, allowing you to focus on building your trading applications without worrying about the underlying API implementation details.
+
+With the Groww SDK, you can easily execute and modify orders in real time, manage your portfolio, access live market data, and more — all through a clean and intuitive Python interface.
+
+*   Trade with Ease: Place, modify, and cancel orders across Equity & F&O.
+*   Real-time Market Data: Fetch live market prices, historical data, and order book depth.
+*   Secure Authentication: Use industry-standard OAuth 2.0 for seamless and secure access.
+*   Comprehensive SDK: Get started quickly with our Python SDK.
+*   WebSockets for Streaming: Subscribe to real-time market feeds and order updates.
+
+* * *
+
+### [Step 1: Prerequisites](http://groww.in/trade-api/docs/python-sdk#step-1-prerequisites)
+
+Trading on Groww using Groww APIs requires:
+
+*   A Groww account with F&O trading enabled.
+*   Basic knowledge of Python and REST APIs.
+*   A development environment with Python 3.7+ installed.
+
+### [Step 2: Generate your Token](http://groww.in/trade-api/docs/python-sdk#step-2-generate-your-token)
+
+To generate an API access token:
+
+*   Log in to your Groww account.
+*   Click on the profile section at the Right-top of your screen.
+*   Click on the setting icon in the menu.
+*   In the navigation list, select ‘Trading APIs’
+
+You can create, revoke and manage all your tokens from this [page](https://groww.in/user/profile/trading-apis).
+
+### [Step 3: Install the Python SDK](http://groww.in/trade-api/docs/python-sdk#step-3-install-the-python-sdk)
+
+You can install the Python SDK by running this command on your terminal/command prompt.
+
+### [Step 4: Place your First Order](http://groww.in/trade-api/docs/python-sdk#step-4-place-your-first-order)
+
+Use this sample code to place an order.
+
+The rate limits are applied at the type level, not on individual APIs. This means that all APIs grouped under a type (e.g., Orders, Live Data, Non Trading) share the same limit. If the limit for one API within a type is exhausted, all other APIs in that type will also be rate-limited until the limit window resets.
+
+| Type | Requests | Limit (Per second) | Limit (Per minute) | Limit (Per Day) |
+| --- | --- | --- | --- | --- |
+| Orders | Create, Modify and Cancel Order | 15 | 250 | 3000 |
+| Live Data | Market Quote, LTP, OHLC | 10 | 300 | 5000 |
+| Non Trading | Order Status, Order list, Trade list, Positions, Holdings, Margin | 10 | 250 | 3000 |

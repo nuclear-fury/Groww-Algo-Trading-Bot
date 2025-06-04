@@ -1,0 +1,102 @@
+Title: Portfolio - Groww API
+
+URL Source: http://groww.in/trade-api/docs/python-sdk/portfolio
+
+Markdown Content:
+This guide describes how to get detailed information about your holdings and positions using our Python SDK.
+
+Use the `get_holdings_for_user` method to fetch your current holdings quickly and see all your stocks in one place.
+
+Holdings represent the user's collection of long-term equity delivery stocks. An asset in a holdings portfolio stays there indefinitely unless it is sold, delisted, or modified by the exchanges. Fundamentally, the assets in the holdings are stored in the user's DEMAT account, as processed by exchanges and clearing institutions.
+
+### [Python SDK Usage](http://groww.in/trade-api/docs/python-sdk/portfolio#python-sdk-usage)
+
+### [Response Payload](http://groww.in/trade-api/docs/python-sdk/portfolio#response-payload)
+
+#### [Response Schema](http://groww.in/trade-api/docs/python-sdk/portfolio#response-schema)
+
+| Name | Type | Description |
+| --- | --- | --- |
+| isin | string | The isin of the symbol |
+| trading_symbol | string | The trading symbol of the holding |
+| quantity | float | The net quantity of the holding |
+| average_price | int | The average price of the holding |
+| pledge_quantity | float | The pledged quantity of the holding |
+| demat_locked_quantity | float | The demat locked quantity of the holding |
+| groww_locked_quantity | float | The Groww locked quantity of the holding |
+| repledge_quantity | float | The repledged quantity of the holding |
+| t1_quantity | float | The T1 quantity of the holding |
+| demat_free_quantity | float | The demat free quantity of the holding |
+| corporate_action_additional_quantity | int | The corporate action additional quantity of the holding |
+| active_demat_transfer_quantity | int | The active demat transfer quantity of the holding |
+
+Fetch all positions associated with your account using this `get_positions_for_user` method.
+
+### [Python SDK Usage](http://groww.in/trade-api/docs/python-sdk/portfolio#python-sdk-usage-1)
+
+#### [Request Schema](http://groww.in/trade-api/docs/python-sdk/portfolio#request-schema)
+
+| Name | Type | Description |
+| --- | --- | --- |
+| segment | string | The [Segment](https://groww.in/trade-api/docs/python-sdk/annexures#segment) of the Orders `CASH``FNO` |
+
+`*`required parameters
+
+### [Response Payload](http://groww.in/trade-api/docs/python-sdk/portfolio#response-payload-1)
+
+#### [Response Schema](http://groww.in/trade-api/docs/python-sdk/portfolio#response-schema-1)
+
+| Name | Type | Description |
+| --- | --- | --- |
+| trading_symbol | string | Trading symbol of the instrument |
+| credit_quantity | int | Quantity of credited stocks |
+| credit_price | int | Average price in paise of credited stocks |
+| debit_quantity | int | Quantity of debited stocks |
+| debit_price | int | Average price in paise of debited stocks |
+| carry_forward_credit_quantity | int | Quantity of carry forward credited stocks |
+| carry_forward_credit_price | int | Average price in paise of carry forward credited stocks |
+| carry_forward_debit_quantity | int | Quantity of carry forward debited stocks |
+| carry_forward_debit_price | int | Average price in paise of carry forward debited stocks |
+| exchange | string | [Stock exchange](https://groww.in/trade-api/docs/python-sdk/annexures#exchange) |
+| symbol_isin | string | ISIN of the stock symbol |
+| quantity | int | Net quantity of stocks |
+| product | string | [Product type](https://groww.in/trade-api/docs/python-sdk/annexures#product) |
+| net_carry_forward_quantity | int | Net carry forward quantity of stocks |
+| net_price | int | Net average price in paise of stocks |
+| net_carry_forward_price | int | Net average price in paise of carry forward stocks |
+
+Retrieve detailed position information for a specific symbol using this `get_position_for_trading_symbol`.
+
+### [Python SDK Usage](http://groww.in/trade-api/docs/python-sdk/portfolio#python-sdk-usage-2)
+
+#### [Request Schema](http://groww.in/trade-api/docs/python-sdk/portfolio#request-schema-1)
+
+| Name | Type | Description |
+| --- | --- | --- |
+| trading_symbol `*` | string | Trading symbol of the instrument. |
+| segment `*` | string | The [Segment](https://groww.in/trade-api/docs/python-sdk/annexures#segment) of the Orders `CASH``FNO` |
+
+`*`required parameter
+
+### [Response Payload](http://groww.in/trade-api/docs/python-sdk/portfolio#response-payload-2)
+
+#### [Response Schema](http://groww.in/trade-api/docs/python-sdk/portfolio#response-schema-2)
+
+| Name | Type | Description |
+| --- | --- | --- |
+| trading_symbol | string | Trading symbol of the instrument. |
+| credit_quantity | int | Quantity of credited stocks |
+| credit_price | int | Average price in paise of credited stocks |
+| debit_quantity | int | Quantity of debited stocks |
+| debit_price | int | Average price in paise of debited stocks |
+| carry_forward_credit_quantity | int | Quantity of carry forward credited stocks |
+| carry_forward_credit_price | int | Average price in paise of carry forward credited stocks |
+| carry_forward_debit_quantity | int | Quantity of carry forward debited stocks |
+| carry_forward_debit_price | int | Average price in paise of carry forward debited stocks |
+| exchange | string | [Stock exchange](https://groww.in/trade-api/docs/python-sdk/annexures#exchange) |
+| symbol_isin | string | ISIN of the stock symbol |
+| quantity | int | Net quantity of stocks |
+| product | string | [Product type](https://groww.in/trade-api/docs/python-sdk/annexures#product) |
+| net_carry_forward_quantity | int | Net carry forward quantity of stocks |
+| net_price | int | Net average price in paise of stocks |
+| net_carry_forward_price | int | Net average price in paise of carry forward stocks |
